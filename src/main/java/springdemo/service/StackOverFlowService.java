@@ -1,13 +1,18 @@
 package springdemo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springdemo.model.StackoverflowWebsite;
+import springdemo.persistence.StackoverflowWebsiteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 public class StackOverFlowService {
+    @Autowired
+    private StackoverflowWebsiteRepository repository;
     private static List<StackoverflowWebsite> items = new ArrayList<>();
 
     static {
@@ -22,7 +27,12 @@ public class StackOverFlowService {
                 "1", "1"));
     }
 
+//    @PostConstruct
+//    public void init(){
+//        repository.save(items);
+//    }
+
     public List<StackoverflowWebsite> findAll() {
-        return items;
+        return repository.findAll();
     }
 }
